@@ -1,0 +1,8 @@
+{
+  "name": "tflite-webnn-test",
+  "version": "0.0.1-alpha",
+  "description": "WebNN external delegate support for TensorFlow.js TFLite",
+  "jsdelivr": "dist/tflite_webnn_delegate_cc.wasm",
+  "author": "Wanming Lin",
+  "license": "Apache-2.0"
+}

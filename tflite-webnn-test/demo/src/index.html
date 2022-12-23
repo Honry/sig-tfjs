@@ -1,0 +1,177 @@
+<!--
+@license
+Copyright 2022 Google LLC. All Rights Reserved.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+=============================================================================
+-->
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Accelerate MobileNet V2 using tfjs-tflite WebNN external delegate</title>
+
+<head>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Google+Sans:400,500,700">
+  <style>
+    body {
+      font-family: 'Google Sans';
+      padding: 20px;
+    }
+
+    h1 {
+      color: #425066;
+      font-size: 31px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    p {
+      color: #425066;
+    }
+
+    video {
+      border-radius: 8px;
+      height: 224px;
+      margin-bottom: 4px;
+    }
+
+    .backend {
+      color: #EF6C00;
+      text-decoration: underline dotted red;
+    }
+
+    .credit {
+      position: absolute;
+      font-size: 11px;
+      color: #eee;
+      top: 202px;
+      left: 10px;
+    }
+
+    .hide {
+      display: none !important;
+    }
+
+    .imgs-container {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    .img-container {
+      flex-direction: column;
+      margin-right: 16px;
+      position: relative;
+    }
+
+    .img-container img {
+      border-radius: 8px;
+      margin-bottom: 4px;
+      height: 224px;
+      width: 224px;
+    }
+
+    .note {
+      color: #EF6C00;
+      opacity: 60%;
+      font-size: 14px;
+    }
+
+    .section-head {
+      font-variant: small-caps;
+      text-transform: uppercase;
+      letter-spacing: 0.17em;
+      line-height: 1.2em;
+      font-weight: 500;
+      margin-top: 2em;
+      margin-bottom: 1em;
+      border-left: 1px solid #EF6C00;
+      padding-left: 24px;
+      margin-left: -24px;
+      color: #818181;
+    }
+
+    .status-msg {
+      color: #425066;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    .stats {
+      color: #999;
+      font-size: 13px;
+      height: 30px;
+      line-height: 30px;
+      opacity: 0;
+      text-align: left;
+      transition: all 200ms;
+    }
+
+    .stats.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body class="disabled">
+  <h1>TFLite WebNN External Delegate Demo</h1>
+  <section>
+    <p class="section-head">Description</p>
+    <p>This demo uses <a href="https://www.npmjs.com/package/@tensorflow/tfjs-tflite">tfjs-tflite</a> package to
+      run the <a href="https://tfhub.dev/tensorflow/lite-model/mobilenet_v2_1.0_224/1/default/1">MobileNet V2</a>
+      to classify images and webcam feed into the categories defined in the model, increases the performance via
+      the WebNN external delegate.
+    </p>
+    <p class="note">
+      <b>Note</b>: If the browser does not have a native implementation of the <a
+        href="https://webmachinelearning.github.io/webnn">WebNN API</a>
+      available, this demo will fall back to the
+      <a href="https://www.npmjs.com/package/@webmachinelearning/webnn-polyfill">webnn-polyfill.</a>
+    </p>  
+  </section>
+
+  <section>
+    <p class="section-head">Status</p>
+    <div class="status-msg" id="loading-msg"></div>
+    <div class="status-msg" id="running-msg"></div>
+  </section>
+  <section>
+    <p class="section-head">Backend</p>
+    <div>
+      <select id="backend">
+        <option value="cpu">WebNN CPU</option>
+        <option value="gpu">WebNN GPU</option>
+        <option value="wasm">WASM</option>
+      </select>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-head">Output</p>
+    <div class="imgs-container hide">
+      <div class="img-container">
+        <img id="img" src="strawberry.jpg"></img>
+        <a class="credit" href="https://unsplash.com/photos/gY6j5aiswtY" target="_blank">
+          source
+        </a>
+        <div class="stats">
+        </div>
+      </div>
+      <div class="img-container">
+        <video autoplay></video>
+        <div class="stats">
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+<script type="module" src="./script.js"></script>
+</html>

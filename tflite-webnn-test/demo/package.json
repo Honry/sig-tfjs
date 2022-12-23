@@ -1,0 +1,26 @@
+{
+  "name": "webnn-external-delegate-demo",
+  "version": "0.0.1",
+  "description": "MobileNet demo using tfjs-tflite WebNN external delegate",
+  "main": "script.js",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@tensorflow/tfjs-backend-cpu": "link:../../../link-package/node_modules/@tensorflow/tfjs-backend-cpu",
+    "@tensorflow/tfjs-core": "link:../../../link-package/node_modules/@tensorflow/tfjs-core",
+    "@tensorflow/tfjs-tflite": "link:../../../link-package/node_modules/@tensorflow/tfjs-tflite",
+    "@webmachinelearning/webnn-polyfill": "^0.1.1",
+    "comlink": "^4.3.1"
+  },
+  "scripts": {
+    "build-deps": "cd ../../../link-package && yarn build-deps-for tfjs-tflite/tflite-webnn-test/demo",
+    "watch": "esbuild --bundle src/script.ts src/worker.ts --format=iife --outdir=src/ --servedir=. --sourcemap"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "clang-format": "~1.5.0",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.15.13",
+    "process": "^0.11.10",
+    "typescript": "4.8.4"
+  }
+}
